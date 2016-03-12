@@ -80,24 +80,3 @@ clean-body:
 
 distclean-body:
 	$(MAKE) $@-default
-
-
-# Define hook targets.
-# We can define targets after 'include Makefile.common',
-# or define default build target explicitly.
-
-download-pre-hook:
-download-post-hook:
-extract-pre-hook:
-extract-post-hook:
-configure-pre-hook:
-configure-post-hook:
-build-pre-hook:
-build-post-hook:
-install-pre-hook:
-install-post-hook:
-clean-pre-hook:
-clean-post-hook:
-distclean-pre-hook:
-distclean-post-hook:
-

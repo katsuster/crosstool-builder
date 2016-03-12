@@ -36,9 +36,7 @@ download-body-default:
 	fi \
 
 $(ARCHIVE_NAME):
-	$(MAKE) download-pre-hook
 	$(MAKE) download-body
-	$(MAKE) download-post-hook
 
 
 extract: $(CONFIGURE_NAME)
@@ -47,9 +45,7 @@ extract-body-default:
 	tar xf $(ARCHIVE_NAME)
 
 $(CONFIGURE_NAME): $(ARCHIVE_NAME)
-	$(MAKE) extract-pre-hook
 	$(MAKE) extract-body
-	$(MAKE) extract-post-hook
 
 
 configure: $(MAKEFILE_NAME)
@@ -58,9 +54,7 @@ configure-body-default:
 	cd $(BASE_NAME) && ./configure
 
 $(MAKEFILE_NAME): $(CONFIGURE_NAME)
-	$(MAKE) configure-pre-hook
 	$(MAKE) configure-body
-	$(MAKE) configure-post-hook
 
 
 build: $(BINARY_NAME)
@@ -69,50 +63,34 @@ build-body-default:
 	$(MAKE) -C $(BASE_NAME)
 
 $(BINARY_NAME): $(MAKEFILE_NAME)
-	$(MAKE) build-pre-hook
 	$(MAKE) build-body
-	$(MAKE) build-post-hook
 
 
 install: $(BINARY_NAME)
-	$(MAKE) install-pre-hook
 	$(MAKE) install-body
-	$(MAKE) install-post-hook
 
 install-body-default:
 	$(MAKE) -C $(BASE_NAME) install
 
 
 clean:
-	$(MAKE) clean-pre-hook
 	$(MAKE) clean-body
-	$(MAKE) clean-post-hook
 
 clean-body-default:
 	rm -rf $(BASE_NAME)
 
 
 distclean: clean
-	$(MAKE) distclean-pre-hook
 	$(MAKE) distclean-body
-	$(MAKE) distclean-post-hook
 
 distclean-body-default:
 	rm -f $(ARCHIVE_NAME)
 
-.PHONY: download extract configure build install clean distclean \
-	download-pre-hook download-post-hook \
+.PHONY: FORCE download extract configure build install clean distclean \
 	download-body download-body-default \
-	extract-pre-hook extract-post-hook \
 	extract-body extract-body-default \
-	configure-pre-hook configure-post-hook \
 	configure-body configure-body-default \
-	build-pre-hook build-post-hook \
 	build-body build-body-default \
-	install-pre-hook install-post-hook \
 	install-body install-body-default \
-	clean-pre-hook clean-post-hook \
 	clean-body clean-body-default \
-	distclean-pre-hook distclean-post-hook \
 	distclean-body distclean-body-default
-
