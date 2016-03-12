@@ -1,27 +1,6 @@
 SUBDIRS = linux-headers binutils gcc-static glibc gcc-shared
 
-all: $(SUBDIRS)
-	for i in $(SUBDIRS) ; \
-	do \
-		$(MAKE) -C $${i} $@; \
-		if [ 0 -ne $$? ]; then exit 1; fi; \
-	done
-
-extract:
-	for i in $(SUBDIRS) ; \
-	do \
-		$(MAKE) -C $${i} $@; \
-		if [ 0 -ne $$? ]; then exit 1; fi; \
-	done
-
-install:
-	for i in $(SUBDIRS) ; \
-	do \
-		$(MAKE) -C $${i} $@; \
-		if [ 0 -ne $$? ]; then exit 1; fi; \
-	done
-
-clean:
+all extract install clean:
 	for i in $(SUBDIRS) ; \
 	do \
 		$(MAKE) -C $${i} $@; \
@@ -36,4 +15,4 @@ distclean:
 	done
 	rm -rf $(CROSS_ROOT)
 
-.PHONY: all install clean distclean $(SUBDIRS)
+.PHONY: all extract install clean distclean $(SUBDIRS)
