@@ -5,7 +5,7 @@ SITE_NAME      = https://www.kernel.org/pub/linux/kernel/v3.x/$(ARCHIVE_NAME)
 ARCHIVE_NAME   = $(BASE_NAME).tar.xz
 CONFIGURE_NAME = $(BASE_NAME)/Makefile
 MAKEFILE_NAME  = $(BASE_NAME)/.config
-BINARY_NAME    = $(BASE_NAME)/vmlinux
+BINARY_NAME    = FORCE
 
 LINUX_CROSS_ARCH     = arm
 

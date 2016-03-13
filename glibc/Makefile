@@ -5,7 +5,7 @@ SITE_NAME      = https://ftp.gnu.org/gnu/glibc/$(ARCHIVE_NAME)
 ARCHIVE_NAME   = $(BASE_NAME).tar.xz
 CONFIGURE_NAME = $(BASE_NAME)/configure
 MAKEFILE_NAME  = $(GLIBC_BUILD_DIR_NAME)/Makefile
-BINARY_NAME    = $(GLIBC_BUILD_DIR_NAME)/libc.so
+BINARY_NAME    = FORCE
 
 GLIBC_BUILD_DIR_NAME = glibc-build
 

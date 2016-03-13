@@ -5,7 +5,7 @@ SITE_NAME      = http://ftp.gnu.org/gnu/binutils/$(ARCHIVE_NAME)
 ARCHIVE_NAME   = $(BASE_NAME).tar.bz2
 CONFIGURE_NAME = $(BASE_NAME)/configure
 MAKEFILE_NAME  = $(BASE_NAME)/Makefile
-BINARY_NAME    = $(BASE_NAME)/binutils/as
+BINARY_NAME    = FORCE
 
 include Makefile.common
 

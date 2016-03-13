@@ -5,7 +5,7 @@ SITE_NAME      = https://ftp.gnu.org/gnu/gcc/gcc-4.9.2/$(ARCHIVE_NAME)
 ARCHIVE_NAME   = $(BASE_NAME).tar.bz2
 CONFIGURE_NAME = $(BASE_NAME)/configure
 MAKEFILE_NAME  = $(GCC_BUILD_DIR_NAME)/Makefile
-BINARY_NAME    = $(GCC_BUILD_DIR_NAME)/gcc/xgcc
+BINARY_NAME    = FORCE
 
 GMP_BASE_NAME      = gmp-6.0.0
 GMP_ARCHIVE_NAME   = $(GMP_BASE_NAME)a.tar.bz2
