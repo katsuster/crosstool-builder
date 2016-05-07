@@ -10,12 +10,12 @@ At first, read and execute env.sh to setup the build environment.
 
 And just make it.
 
-    $ make
+    $ make install
 
 NOTE: This takes long times (about 10~20 minutes and more).
 If you want to build more faster, consider to use parallel make.
 
-    $ make -j4
+    $ make -j4 install
 
 The cross-compiler toolchain is generated on below directory.
 
