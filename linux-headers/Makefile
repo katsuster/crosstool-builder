@@ -1,7 +1,7 @@
 
 BASE_NAME      = linux-3.18.11
 CACHE_NAME     = ../caches/$(ARCHIVE_NAME)
-SITE_NAME      = https://www.kernel.org/pub/linux/kernel/v3.x/$(ARCHIVE_NAME)
+SITE_NAME      = https://mirrors.edge.kernel.org/pub/linux/kernel/v3.x/$(ARCHIVE_NAME)
 ARCHIVE_NAME   = $(BASE_NAME).tar.xz
 CONFIGURE_NAME = $(BASE_NAME)/Makefile
 MAKEFILE_NAME  = $(BASE_NAME)/.config
