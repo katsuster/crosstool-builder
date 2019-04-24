@@ -45,6 +45,7 @@ extract-body:
 	cd $(BASE_NAME) && ln -s ../$(MPC_BASE_NAME) mpc
 	cd $(BASE_NAME) && ln -s ../$(ISL_BASE_NAME) isl
 	cd $(BASE_NAME) && ln -s ../$(CLOOG_BASE_NAME) cloog
+	cd $(BASE_NAME) && patch -p1 < ../gcc_fix_gperf.patch
 
 configure-body:
 	mkdir -p $(GCC_BUILD_DIR_NAME)
