@@ -1,21 +1,21 @@
 
-BASE_NAME      = gcc-4.9.2
+BASE_NAME      = gcc-6.4.0
 CACHE_NAME     = ../caches/$(ARCHIVE_NAME)
-SITE_NAME      = https://ftp.gnu.org/gnu/gcc/gcc-4.9.2/$(ARCHIVE_NAME)
-ARCHIVE_NAME   = $(BASE_NAME).tar.bz2
+SITE_NAME      = https://ftp.gnu.org/gnu/gcc/gcc-6.4.0/$(ARCHIVE_NAME)
+ARCHIVE_NAME   = $(BASE_NAME).tar.xz
 CONFIGURE_NAME = $(BASE_NAME)/configure
 MAKEFILE_NAME  = $(GCC_BUILD_DIR_NAME)/Makefile
 BINARY_NAME    = FORCE
 
-GMP_BASE_NAME      = gmp-6.0.0
-GMP_ARCHIVE_NAME   = $(GMP_BASE_NAME)a.tar.bz2
-MPFR_BASE_NAME     = mpfr-3.1.2
-MPFR_ARCHIVE_NAME  = $(MPFR_BASE_NAME).tar.bz2
-MPC_BASE_NAME      = mpc-1.0.2
+GMP_BASE_NAME      = gmp-6.1.2
+GMP_ARCHIVE_NAME   = $(GMP_BASE_NAME).tar.xz
+MPFR_BASE_NAME     = mpfr-3.1.5
+MPFR_ARCHIVE_NAME  = $(MPFR_BASE_NAME).tar.xz
+MPC_BASE_NAME      = mpc-1.0.3
 MPC_ARCHIVE_NAME   = $(MPC_BASE_NAME).tar.gz
-ISL_BASE_NAME      = isl-0.12.2
-ISL_ARCHIVE_NAME   = $(ISL_BASE_NAME).tar.bz2
-CLOOG_BASE_NAME    = cloog-0.18.2
+ISL_BASE_NAME      = isl-0.18
+ISL_ARCHIVE_NAME   = $(ISL_BASE_NAME).tar.xz
+CLOOG_BASE_NAME    = cloog-0.18.4
 CLOOG_ARCHIVE_NAME = $(CLOOG_BASE_NAME).tar.gz
 
 DEPEND_LIB_DIR_NAME = ../depends
