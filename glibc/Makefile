@@ -1,5 +1,5 @@
 
-BASE_NAME      = glibc-2.19
+BASE_NAME      = glibc-2.24
 CACHE_NAME     = ../caches/$(ARCHIVE_NAME)
 SITE_NAME      = https://ftp.gnu.org/gnu/glibc/$(ARCHIVE_NAME)
 ARCHIVE_NAME   = $(BASE_NAME).tar.xz
@@ -23,6 +23,7 @@ download-body:
 
 extract-body:
 	$(MAKE) $@-default
+	cd $(BASE_NAME) && patch -p1 < ../glibc-add-patch-fixing-the-build-with-binutils-2.29.patch
 
 configure-body:
 	mkdir -p $(GLIBC_BUILD_DIR_NAME)
