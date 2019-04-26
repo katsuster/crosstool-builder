@@ -1,5 +1,5 @@
 
-BASE_NAME      = binutils-2.25
+BASE_NAME      = binutils-2.31.1
 CACHE_NAME     = ../caches/$(ARCHIVE_NAME)
 SITE_NAME      = http://ftp.gnu.org/gnu/binutils/$(ARCHIVE_NAME)
 ARCHIVE_NAME   = $(BASE_NAME).tar.bz2
