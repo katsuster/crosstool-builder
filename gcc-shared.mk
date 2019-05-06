@@ -25,6 +25,8 @@ configure-body:
 	  --disable-libsanitizer \
 	  --enable-libssp \
 	  --enable-libstdcxx-pch \
+	  --enable-long-long \
+	  --enable-lto \
 	  --disable-multiarch \
 	  --disable-multilib \
 	  --enable-nls \
