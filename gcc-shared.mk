@@ -16,7 +16,7 @@ configure-body:
 	$(SRC_DIR)/configure \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
-	  --enable-languages=c,c++ \
+	  --enable-languages=c,c++,fortran \
 	  --enable-libatomic \
 	  --disable-libitm \
 	  --enable-libgomp \
