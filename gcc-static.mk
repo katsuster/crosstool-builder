@@ -17,21 +17,22 @@ configure-body:
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
 	  --enable-languages=c \
-	  --disable-libstdcxx-pch \
+	  --disable-libatomic \
+	  --disable-libitm \
 	  --disable-libgomp \
 	  --disable-libmudflap \
 	  --disable-libquadmath \
-	  --disable-libssp \
-	  --disable-libatomic \
-	  --disable-libitm \
 	  --disable-libsanitizer \
+	  --disable-libssp \
+	  --disable-libstdcxx-pch \
 	  --disable-multiarch \
 	  --disable-multilib \
 	  --disable-nls \
 	  --disable-plugin \
 	  --disable-shared \
 	  --disable-threads \
-	  --without-headers\
+	  --disable-__cxa_atexit \
+	  --without-headers \
 	  --with-local-prefix=$(SYSROOT) \
 	  --with-sysroot=$(SYSROOT) \
 	  --with-newlib
