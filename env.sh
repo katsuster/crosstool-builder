@@ -8,6 +8,10 @@
 #export CROSS_ARCH=aarch64-unknown-linux-gnu
 #export LINUX_ARCH=arm64
 
+# For RISC-V 32 (glibc is not supported)
+#export CROSS_ARCH=riscv32-unknown-elf
+#export LINUX_ARCH=riscv
+
 # For RISC-V 64
 export CROSS_ARCH=riscv64-unknown-linux-gnu
 export LINUX_ARCH=riscv
