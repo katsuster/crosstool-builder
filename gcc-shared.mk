@@ -17,14 +17,14 @@ configure-body:
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
 	  --enable-languages=c,c++ \
-	  --disable-libstdcxx-pch \
+	  --enable-libatomic \
+	  --disable-libitm \
 	  --enable-libgomp \
 	  --enable-libmudflap \
 	  --enable-libquadmath \
-	  --enable-libssp \
-	  --enable-libatomic \
-	  --disable-libitm \
 	  --disable-libsanitizer \
+	  --enable-libssp \
+	  --enable-libstdcxx-pch \
 	  --disable-multiarch \
 	  --disable-multilib \
 	  --enable-nls \
