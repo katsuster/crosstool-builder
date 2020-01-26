@@ -33,7 +33,7 @@ configure-body:
 	  --disable-plugin \
 	  --disable-shared \
 	  --disable-threads \
-	  --disable-__cxa_atexit \
+	  --enable-__cxa_atexit \
 	  --without-headers \
 	  --with-local-prefix=$(SYSROOT) \
 	  --with-sysroot=$(SYSROOT) \
