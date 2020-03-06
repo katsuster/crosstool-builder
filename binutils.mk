@@ -19,6 +19,7 @@ configure-body:
 	  --disable-nls \
 	  --disable-static \
 	  --disable-werror \
+	  --with-system-readline \
 	  --with-lib-path=$(CROSS_ROOT)/lib \
 	  --with-sysroot=$(CROSS_ROOT)
 
