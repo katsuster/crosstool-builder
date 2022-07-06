@@ -16,10 +16,17 @@ configure-body:
 	$(SRC_DIR)/configure \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(CROSS_ROOT) \
-	  --disable-nls \
-	  --disable-static \
 	  --disable-werror \
-	  --with-system-readline \
+	  --enable-binutils \
+	  --enable-gas \
+	  --enable-gdb \
+	  --enable-gold \
+	  --enable-gprof \
+	  --enable-ld \
+	  --enable-libdecnumber \
+	  --enable-libreadline \
+	  --enable-sim \
+	  --with-expat=yes \
 	  --with-lib-path=$(CROSS_ROOT)/lib \
 	  --with-sysroot=$(CROSS_ROOT)
 
