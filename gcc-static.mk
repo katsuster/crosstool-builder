@@ -14,6 +14,8 @@ include common.mk
 configure-body:
 	cd $(BUILD_DIR) && \
 	$(SRC_DIR)/configure \
+	  CFLAGS="-g -O0 -fno-inline" \
+	  CXXFLAGS="-g -O0 -fno-inline" \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
 	  --enable-languages=c \
@@ -37,7 +39,8 @@ configure-body:
 	  --without-headers \
 	  --with-local-prefix=$(SYSROOT) \
 	  --with-sysroot=$(SYSROOT) \
-	  --with-newlib
+	  --with-newlib \
+	  --with-pkgversion="testtest"
 
 build-body:
 	$(MAKE) -f $(BUILDER_NAME) $@-default
