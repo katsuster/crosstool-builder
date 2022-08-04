@@ -16,8 +16,8 @@ include common.mk
 configure-body:
 	cd $(BUILD_DIR) && \
 	$(SRC_DIR)/configure \
-	  CFLAGS="-O2 -g" \
-	  CXXFLAGS="-O2 -g" \
+	  CFLAGS="-O2 -g $(ARCH_CFLAGS_FOR_TARGET)" \
+	  CXXFLAGS="-O2 -g $(ARCH_CXXFLAGS_FOR_TARGET)" \
 	  --host=$(CROSS_ARCH) \
 	  --prefix=/usr \
 	  --with-headers=$(SYSROOT)/usr/include \
