@@ -14,7 +14,10 @@
 
 # For RISC-V 64
 export CROSS_ARCH=riscv64-unknown-linux-gnu
+#export CROSS_ARCH=riscv64-unknown-elf
 export LINUX_ARCH=riscv
+export ARCH_CFLAGS_FOR_TARGET=-mcmodel=medany
+export ARCH_CXXFLAGS_FOR_TARGET=-mcmodel=medany
 
 export TOP_DIR=`pwd`
 export CROSS_ROOT=$TOP_DIR/buildroot
