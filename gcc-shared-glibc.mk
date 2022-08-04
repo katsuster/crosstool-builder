@@ -14,6 +14,10 @@ include common.mk
 configure-body:
 	cd $(BUILD_DIR) && \
 	$(SRC_DIR)/configure \
+	  CFLAGS="-g -O0 -fno-inline $(ARCH_CFLAGS)" \
+	  CXXFLAGS="-g -O0 -fno-inline $(ARCH_CFLAGS)" \
+	  CFLAGS_FOR_TARGET="-g -O0 -fno-inline $(ARCH_CFLAGS_FOR_TARGET)" \
+	  CXXFLAGS_FOR_TARGET="-g -O0 -fno-inline $(ARCH_CXXFLAGS_FOR_TARGET)" \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
 	  --enable-languages=c,c++,fortran \
@@ -34,10 +38,7 @@ configure-body:
 	  --enable-shared \
 	  --enable-threads=posix \
 	  --enable-__cxa_atexit \
-	  --with-local-prefix=$(SYSROOT)/usr \
-	  --with-build-sysroot=$(SYSROOT) \
-	  --with-sysroot=$(SYSROOT) \
-	  --with-native-system-header-dir=/usr/include
+	  --with-sysroot=$(SYSROOT)
 
 build-body:
 	$(MAKE) -f $(BUILDER_NAME) $@-default
