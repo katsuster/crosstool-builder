@@ -16,15 +16,10 @@ include common.mk
 configure-body:
 	cd $(BUILD_DIR) && \
 	$(SRC_DIR)/configure \
+	  CFLAGS="-O2 -g" \
+	  CXXFLAGS="-O2 -g" \
 	  --host=$(CROSS_ARCH) \
-	  --prefix=$(SYSROOT)/usr \
-	  --disable-profile \
-	  --disable-multilib \
-	  --enable-add-ons \
-	  --enable-kernel=3.0.0 \
-	  --disable-multi-arch \
-	  --enable-obsolete-rpc \
-	  --with-binutils=$(PREFIX)/bin \
+	  --prefix=/usr \
 	  --with-headers=$(SYSROOT)/usr/include \
 	  --with-sysroot=$(SYSROOT)
 
@@ -32,21 +27,7 @@ build-body:
 	$(MAKE) -f $(BUILDER_NAME) $@-default
 
 install-body:
-	$(MAKE) -f $(BUILDER_NAME) $@-default
-	cd $(SYSROOT) && \
-	  mkdir -p lib && \
-	  mv usr/lib/* lib/
-	cd $(SYSROOT) && \
-	  for i in lib/libc.so ; \
-	  do \
-		cat $${i} | \
-		sed -e "s#$(SYSROOT)/usr##g" > $${i}.new ; \
-		mv $${i}.new $${i} ; \
-	  done
-	cd $(SYSROOT)/usr/lib && \
-	  ln -s ../../lib/libc.so.6 libc.so ; \
-	  ln -s ../../lib/libpthread.so.0 libpthread.so ; \
-	  ln -s ../../lib/libm.so.6 libm.so ;
+	$(MAKE) -C $(BUILD_DIR) install install_root=$(SYSROOT)
 
 clean-body:
 	$(MAKE) -f $(BUILDER_NAME) $@-default
