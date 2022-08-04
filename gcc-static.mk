@@ -38,8 +38,8 @@ configure-body:
 	  --enable-__cxa_atexit \
 	  --without-headers \
 	  --with-local-prefix=$(SYSROOT) \
-	  --with-sysroot=$(SYSROOT) \
 	  --with-newlib \
+	  --with-sysroot=$(SYSROOT) \
 	  --with-pkgversion="testtest"
 
 build-body:
