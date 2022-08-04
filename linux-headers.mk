@@ -18,8 +18,8 @@ configure-body:
 	  ARCH=$(LINUX_CROSS_ARCH) defconfig
 
 build-body:
-	$(MAKE) -C $(SRC_DIR) \
-	  ARCH=$(LINUX_CROSS_ARCH) headers_check
+	#$(MAKE) -C $(SRC_DIR) \
+	#  ARCH=$(LINUX_CROSS_ARCH) headers_check
 
 install-body:
 	$(MAKE) -C $(SRC_DIR) \
