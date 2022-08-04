@@ -16,7 +16,6 @@ configure-body:
 	$(SRC_DIR)/configure \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(CROSS_ROOT) \
-	  --disable-werror \
 	  --enable-binutils \
 	  --enable-gas \
 	  --enable-gdb \
@@ -26,6 +25,7 @@ configure-body:
 	  --enable-libdecnumber \
 	  --enable-libreadline \
 	  --enable-sim \
+	  --disable-werror \
 	  --with-expat=yes \
 	  --with-lib-path=$(CROSS_ROOT)/lib \
 	  --with-sysroot=$(CROSS_ROOT)
