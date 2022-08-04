@@ -15,7 +15,7 @@ configure-body:
 	cd $(BUILD_DIR) && \
 	$(SRC_DIR)/configure \
 	  --target=$(CROSS_ARCH) \
-	  --prefix=$(CROSS_ROOT) \
+	  --prefix=$(PREFIX) \
 	  --enable-binutils \
 	  --enable-gas \
 	  --enable-gdb \
@@ -26,9 +26,7 @@ configure-body:
 	  --enable-libreadline \
 	  --enable-sim \
 	  --disable-werror \
-	  --with-expat=yes \
-	  --with-lib-path=$(CROSS_ROOT)/lib \
-	  --with-sysroot=$(CROSS_ROOT)
+	  --with-expat=yes
 
 build-body:
 	$(MAKE) -f $(BUILDER_NAME) $@-default
