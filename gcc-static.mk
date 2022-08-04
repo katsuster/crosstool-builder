@@ -16,6 +16,8 @@ configure-body:
 	$(SRC_DIR)/configure \
 	  CFLAGS="-g -O0 -fno-inline" \
 	  CXXFLAGS="-g -O0 -fno-inline" \
+	  CFLAGS_FOR_TARGET="-g -O0 -fno-inline" \
+	  CXXFLAGS_FOR_TARGET="-g -O0 -fno-inline" \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
 	  --enable-languages=c \
@@ -43,10 +45,12 @@ configure-body:
 	  --with-pkgversion="testtest"
 
 build-body:
-	$(MAKE) -f $(BUILDER_NAME) $@-default
+	$(MAKE) -C $(BUILD_DIR) all-gcc
+	$(MAKE) -C $(BUILD_DIR) all-target-libgcc
 
 install-body:
-	$(MAKE) -f $(BUILDER_NAME) $@-default
+	$(MAKE) -C $(BUILD_DIR) install-gcc
+	$(MAKE) -C $(BUILD_DIR) install-target-libgcc
 
 clean-body:
 	$(MAKE) -f $(BUILDER_NAME) $@-default
