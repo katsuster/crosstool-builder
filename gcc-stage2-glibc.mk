@@ -1,6 +1,6 @@
 
 SRC_NAME       ?= gcc
-BUILD_NAME     ?= $(SRC_NAME)-shared-glibc
+BUILD_NAME     ?= $(SRC_NAME)-stage2-glibc
 BUILDER_NAME   ?= $(BUILD_NAME).mk
 
 CONFIGURE_NAME ?= $(SRC_DIR)/configure
