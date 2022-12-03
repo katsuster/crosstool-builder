@@ -8,7 +8,7 @@ ifeq ($(CROSS_ROOT), )
   $(error "CROSS_ROOT is empty.")
 endif
 
-SUBMODULES = binutils gcc-static musl gcc-shared-musl
+SUBMODULES = linux-headers binutils gcc-stage1-musl musl gcc-stage2-musl
 
 all install clean allclean:
 	for i in $(SUBMODULES) ; \
