@@ -13,14 +13,14 @@ include common.mk
 # We can define targets after 'include Makefile.common',
 # or define default build target explicitly.
 
-MARCH_LIST   ?= rv32imac rv32imafc
-MABI_LIST    ?= ilp32 ilp32f
-MSFLOAT_LIST ?= -D__riscv_soft_float -D__riscv_hard_float
+MARCH_LIST   ?= rv64gc rv32gc
+MABI_LIST    ?= lp64d ilp32d
+MSFLOAT_LIST ?= -D__riscv_hard_float -D__riscv_soft_float
 
 define configure_macro
 	$(eval MARCH   = $(word $(1),$(MARCH_LIST)))
-	$(eval MABI    = $(word $(1),$(MABI_LIST)))
-	$(eval MSFLOAT = $(word $(1),$(MSFLOAT_LIST)))
+	$(eval MABI    = $(word $(2),$(MABI_LIST)))
+	$(eval MSFLOAT = $(word $(3),$(MSFLOAT_LIST)))
 	mkdir -p $(BUILD_DIR)_$(MARCH) && cd $(BUILD_DIR)_$(MARCH) && \
 	$(SRC_DIR)/configure \
 	  --target=$(CROSS_ARCH) \
@@ -32,10 +32,10 @@ define configure_macro
 endef
 
 define build_macro
-	$(eval MARCH   = $(word $(1),$(MARCH_LIST)))
-	$(eval MABI    = $(word $(1),$(MABI_LIST)))
-	$(eval MSFLOAT = $(word $(1),$(MSFLOAT_LIST)))
-	$(MAKE) -C $(BUILD_DIR)_$(MARCH) $(2)
+	$(eval MARCH   = $(word $(2),$(MARCH_LIST)))
+	$(eval MABI    = $(word $(2),$(MABI_LIST)))
+	$(eval MSFLOAT = $(word $(2),$(MSFLOAT_LIST)))
+	$(MAKE) -C $(BUILD_DIR)_$(MARCH) $(1)
 endef
 
 define allclean_macro
@@ -46,25 +46,19 @@ define allclean_macro
 endef
 
 configure-body:
-	$(call configure_macro,1)
-	$(call configure_macro,2)
+	$(call configure_macro, 1, 1, 1)
 
 build-body:
-	$(call build_macro,1)
-	$(call build_macro,2)
+	$(call build_macro, all, 1)
 
 install-body:
-	$(call build_macro,1,install)
-	$(call build_macro,2,install)
+	$(call build_macro, install, 1)
 
 clean-body:
-	$(call build_macro,1,clean)
-	$(call build_macro,2,clean)
+	$(call build_macro, clean, 1)
 
 distclean-body:
-	$(call build_macro,1,distclean)
-	$(call build_macro,2,distclean)
+	$(call build_macro, distclean, 1)
 
 allclean-body:
-	$(call allclean_macro,1)
-	$(call allclean_macro,2)
+	$(call allclean_macro, 1)
