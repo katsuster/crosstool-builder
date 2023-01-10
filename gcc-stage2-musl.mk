@@ -1,6 +1,6 @@
 
 SRC_NAME       ?= gcc
-BUILD_NAME     ?= $(SRC_NAME)-shared-musl
+BUILD_NAME     ?= $(SRC_NAME)-stage2-musl
 BUILDER_NAME   ?= $(BUILD_NAME).mk
 
 CONFIGURE_NAME ?= $(SRC_DIR)/configure
@@ -13,10 +13,16 @@ include common.mk
 
 configure-body:
 	cd $(BUILD_DIR) && \
+	echo 'lt_cv_shlibpath_overrides_runpath=no' > config.cache && \
 	$(SRC_DIR)/configure \
+	  CFLAGS="-g -O0 -fno-inline $(ARCH_CFLAGS)" \
+	  CXXFLAGS="-g -O0 -fno-inline $(ARCH_CFLAGS)" \
+	  CFLAGS_FOR_TARGET="-g -O0 -fno-inline $(ARCH_CFLAGS_FOR_TARGET)" \
+	  CXXFLAGS_FOR_TARGET="-g -O0 -fno-inline $(ARCH_CXXFLAGS_FOR_TARGET)" \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
-	  --enable-languages=c,c++ \
+	  --cache-file=config.cache \
+	  --enable-languages=c \
 	  --disable-libatomic \
 	  --disable-libitm \
 	  --disable-libgomp \
@@ -24,23 +30,18 @@ configure-body:
 	  --disable-libquadmath \
 	  --disable-libsanitizer \
 	  --disable-libssp \
-	  --disable-libstdcxx-pch \
-	  --disable-long-long \
-	  --disable-lto \
+	  --enable-libstdcxx-pch \
+	  --enable-long-long \
+	  --enable-lto \
 	  --disable-multiarch \
-	  --enable-multilib \
-	  --disable-nls \
-	  --disable-plugin \
+	  --disable-multilib \
+	  --enable-nls \
+	  --enable-plugin \
 	  --disable-shared \
-	  --disable-threads \
+	  --enable-threads=posix \
 	  --enable-__cxa_atexit \
-	  --with-abi=ilp32 \
-	  --with-arch=rv32ima \
-	  --with-local-prefix=$(SYSROOT)/usr \
-	  --with-build-sysroot=$(SYSROOT) \
-	  --with-newlib \
-	  --with-sysroot=$(SYSROOT) \
-	  --with-native-system-header-dir=/usr/include
+	  --with-headers=$(SYSROOT)/usr/include \
+	  --with-sysroot=$(SYSROOT)
 
 build-body:
 	$(MAKE) -f $(BUILDER_NAME) $@-default

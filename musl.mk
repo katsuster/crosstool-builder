@@ -23,25 +23,21 @@ define configure_macro
 	$(eval MSFLOAT = $(word $(3),$(MSFLOAT_LIST)))
 	mkdir -p $(BUILD_DIR)_$(MARCH) && cd $(BUILD_DIR)_$(MARCH) && \
 	$(SRC_DIR)/configure \
+	  CPPFLAGS='$(MSFLOAT)' \
+	  CFLAGS='-O2 -march=$(MARCH) -mabi=$(MABI)' \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(SYSROOT)/usr \
-	  --libdir=$(PREFIX)/$(CROSS_ARCH)/lib/$(MARCH)/$(MABI) \
-	  --disable-shared \
-	  CPPFLAGS='$(MSFLOAT)' \
-	  CFLAGS='-O2 -march=$(MARCH) -mabi=$(MABI)'
+	  --libdir=$(SYSROOT)/usr/lib/$(MARCH)/$(MABI) \
+	  --enable-shared
 endef
 
 define build_macro
 	$(eval MARCH   = $(word $(2),$(MARCH_LIST)))
-	$(eval MABI    = $(word $(2),$(MABI_LIST)))
-	$(eval MSFLOAT = $(word $(2),$(MSFLOAT_LIST)))
 	$(MAKE) -C $(BUILD_DIR)_$(MARCH) $(1)
 endef
 
 define allclean_macro
 	$(eval MARCH   = $(word $(1),$(MARCH_LIST)))
-	$(eval MABI    = $(word $(1),$(MABI_LIST)))
-	$(eval MSFLOAT = $(word $(1),$(MSFLOAT_LIST)))
 	rm -rf $(BUILD_DIR)_$(MARCH)
 endef
 
