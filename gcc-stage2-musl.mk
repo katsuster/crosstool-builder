@@ -13,16 +13,14 @@ include common.mk
 
 configure-body:
 	cd $(BUILD_DIR) && \
-	echo 'lt_cv_shlibpath_overrides_runpath=no' > config.cache && \
 	$(SRC_DIR)/configure \
-	  CFLAGS="-g -O0 -fno-inline $(ARCH_CFLAGS)" \
-	  CXXFLAGS="-g -O0 -fno-inline $(ARCH_CFLAGS)" \
-	  CFLAGS_FOR_TARGET="-g -O0 -fno-inline $(ARCH_CFLAGS_FOR_TARGET)" \
-	  CXXFLAGS_FOR_TARGET="-g -O0 -fno-inline $(ARCH_CXXFLAGS_FOR_TARGET)" \
+	  CFLAGS="-g -O2 -fno-inline $(ARCH_CFLAGS)" \
+	  CXXFLAGS="-g -O2 -fno-inline $(ARCH_CFLAGS)" \
+	  CFLAGS_FOR_TARGET="-g -O2 -fno-inline $(ARCH_CFLAGS_FOR_TARGET)" \
+	  CXXFLAGS_FOR_TARGET="-g -O2 -fno-inline $(ARCH_CXXFLAGS_FOR_TARGET)" \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
-	  --cache-file=config.cache \
-	  --enable-languages=c \
+	  --enable-languages=c,c++ \
 	  --disable-libatomic \
 	  --disable-libitm \
 	  --disable-libgomp \
@@ -34,7 +32,7 @@ configure-body:
 	  --enable-long-long \
 	  --enable-lto \
 	  --disable-multiarch \
-	  --enable-multilib \
+	  --disable-multilib \
 	  --enable-nls \
 	  --enable-plugin \
 	  --disable-shared \
