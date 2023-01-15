@@ -32,11 +32,12 @@ configure-body:
 	  --enable-long-long \
 	  --enable-lto \
 	  --disable-multiarch \
-	  --disable-multilib \
+	  --enable-multilib \
 	  --disable-nls \
 	  --disable-plugin \
 	  --disable-shared \
 	  --disable-threads \
+	  --enable-tls \
 	  --enable-__cxa_atexit \
 	  --without-headers \
 	  --with-local-prefix=$(SYSROOT) \
