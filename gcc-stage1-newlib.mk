@@ -37,7 +37,7 @@ configure-body:
 	  --disable-plugin \
 	  --disable-shared \
 	  --disable-threads \
-	  --enable-tls\
+	  --enable-tls \
 	  --enable-__cxa_atexit \
 	  --without-headers \
 	  --with-local-prefix=$(SYSROOT) \
