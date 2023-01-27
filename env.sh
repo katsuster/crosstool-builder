@@ -14,6 +14,7 @@
 
 # For RISC-V 64
 export CROSS_ARCH=riscv64-unknown-linux-gnu
+#export CROSS_ARCH=riscv64-unknown-linux-musl
 #export CROSS_ARCH=riscv64-unknown-elf
 export LINUX_ARCH=riscv
 export ARCH_CFLAGS_FOR_TARGET=-mcmodel=medany
