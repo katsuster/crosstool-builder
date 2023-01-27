@@ -16,8 +16,11 @@ include common.mk
 MARCH_LIST   ?= rv64gc rv64imac rv32gc rv32imac
 MABI_LIST    ?= lp64d lp64 ilp32d ilp32
 
+#MARCH_EXT    ?= _zicsr_zifencei
+MARCH_EXT    ?=
+
 define configure_macro
-	$(eval MARCH   = $(word $(1),$(MARCH_LIST)))
+	$(eval MARCH   = $(word $(1),$(MARCH_LIST))$(MARCH_EXT))
 	$(eval MABI    = $(word $(1),$(MABI_LIST)))
 	mkdir -p $(BUILD_DIR)_$(MARCH) && cd $(BUILD_DIR)_$(MARCH) && \
 	$(SRC_DIR)/configure \
@@ -31,17 +34,17 @@ define configure_macro
 endef
 
 define build_macro
-	$(eval MARCH   = $(word $(2),$(MARCH_LIST)))
+	$(eval MARCH   = $(word $(2),$(MARCH_LIST))$(MARCH_EXT))
 	$(MAKE) -C $(BUILD_DIR)_$(MARCH) $(1)
 endef
 
 define install_macro
-	$(eval MARCH   = $(word $(1),$(MARCH_LIST)))
+	$(eval MARCH   = $(word $(1),$(MARCH_LIST))$(MARCH_EXT))
 	$(MAKE) -C $(BUILD_DIR)_$(MARCH) install install_root=$(SYSROOT)
 endef
 
 define allclean_macro
-	$(eval MARCH   = $(word $(1),$(MARCH_LIST)))
+	$(eval MARCH   = $(word $(1),$(MARCH_LIST))$(MARCH_EXT))
 	rm -rf $(BUILD_DIR)_$(MARCH)
 endef
 
