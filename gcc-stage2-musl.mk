@@ -35,7 +35,7 @@ configure-body:
 	  --disable-multilib \
 	  --enable-nls \
 	  --enable-plugin \
-	  --disable-shared \
+	  --enable-shared \
 	  --enable-threads=posix \
 	  --enable-__cxa_atexit \
 	  --with-headers=$(SYSROOT)/usr/include \
