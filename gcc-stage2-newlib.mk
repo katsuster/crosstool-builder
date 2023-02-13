@@ -20,13 +20,13 @@ configure-body:
 	  CXXFLAGS_FOR_TARGET="-g -O2 -fno-inline $(ARCH_CXXFLAGS_FOR_TARGET)" \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
-	  --enable-checking \
-	  --enable-languages=c,c++ \
+	  --enable-checking=yes \
+	  --enable-languages=c,c++,fortran \
 	  --disable-libatomic \
 	  --disable-libitm \
 	  --disable-libgomp \
-	  --enable-libmudflap \
-	  --enable-libquadmath \
+	  --disable-libmudflap \
+	  --disable-libquadmath \
 	  --disable-libsanitizer \
 	  --disable-libssp \
 	  --enable-libstdcxx-pch \
@@ -37,8 +37,9 @@ configure-body:
 	  --enable-nls \
 	  --enable-plugin \
 	  --disable-shared \
-	  --enable-tls \
 	  --disable-threads \
+	  --enable-tls \
+	  --disable-werror \
 	  --enable-__cxa_atexit \
 	  --with-native-system-header-dir=/include \
 	  --with-newlib \
