@@ -20,6 +20,7 @@ configure-body:
 	  CXXFLAGS_FOR_TARGET="-g -O2 -fno-inline $(ARCH_CXXFLAGS_FOR_TARGET)" \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
+	  --enable-checking=yes \
 	  --enable-languages=c,c++,fortran \
 	  --enable-libatomic \
 	  --disable-libitm \
@@ -37,6 +38,7 @@ configure-body:
 	  --enable-plugin \
 	  --enable-shared \
 	  --enable-threads=posix \
+	  --enable-tls \
 	  --enable-__cxa_atexit \
 	  --with-sysroot=$(SYSROOT)
 
