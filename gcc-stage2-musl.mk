@@ -20,14 +20,15 @@ configure-body:
 	  CXXFLAGS_FOR_TARGET="-g -O2 -fno-inline $(ARCH_CXXFLAGS_FOR_TARGET)" \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
-	  --enable-languages=c,c++ \
-	  --disable-libatomic \
+	  --enable-checking=yes \
+	  --enable-languages=c,c++,fortran \
+	  --enable-libatomic \
 	  --disable-libitm \
-	  --disable-libgomp \
-	  --disable-libmudflap \
-	  --disable-libquadmath \
+	  --enable-libgomp \
+	  --enable-libmudflap \
+	  --enable-libquadmath \
 	  --disable-libsanitizer \
-	  --disable-libssp \
+	  --enable-libssp \
 	  --enable-libstdcxx-pch \
 	  --enable-long-long \
 	  --enable-lto \
@@ -37,6 +38,7 @@ configure-body:
 	  --enable-plugin \
 	  --enable-shared \
 	  --enable-threads=posix \
+	  --enable-tls \
 	  --enable-__cxa_atexit \
 	  --with-headers=$(SYSROOT)/usr/include \
 	  --with-sysroot=$(SYSROOT)
