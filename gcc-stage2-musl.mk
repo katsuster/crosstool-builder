@@ -33,7 +33,7 @@ configure-body:
 	  --enable-long-long \
 	  --enable-lto \
 	  --disable-multiarch \
-	  --disable-multilib \
+	  --enable-multilib \
 	  --enable-nls \
 	  --enable-plugin \
 	  --enable-shared \
