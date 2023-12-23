@@ -1,28 +1,23 @@
 
 SRC_NAME       ?= musl
 BUILD_NAME     ?= $(SRC_NAME)
-BUILDER_NAME   ?= $(BUILD_NAME).mk
+BUILDER_NAME   ?= $(BUILD_NAME)$(BUILDER_SUFFIX).mk
+CONFIGURE_NAME ?= configure
+MAKEFILE_NAME  ?= Makefile
 
-CONFIGURE_NAME ?= $(SRC_DIR)/configure
-MAKEFILE_NAME  ?= $(BUILD_DIR)/Makefile
-BINARY_NAME    = FORCE
+# Override
+BINARY_PATH    ?= FORCE
 
 include common.mk
 
 # Define body targets.
-# We can define targets after 'include Makefile.common',
-# or define default build target explicitly.
-
-MARCH_LIST   ?= rv64gc rv64imac rv32gc rv32imac
-MABI_LIST    ?= lp64d lp64 ilp32d ilp32
-MLIBDIR_LIST ?= lib64 lib64 lib32 lib32
 
 define configure_macro
 	$(eval MARCH   = $(word $(1),$(MARCH_LIST)))
 	$(eval MABI    = $(word $(1),$(MABI_LIST)))
 	$(eval MLIBDIR = $(word $(1),$(MLIBDIR_LIST)))
-	mkdir -p $(BUILD_DIR)_$(MARCH) && cd $(BUILD_DIR)_$(MARCH) && \
-	$(SRC_DIR)/configure \
+	mkdir -p $(BUILD_PATH)_$(MARCH) && cd $(BUILD_PATH)_$(MARCH) && \
+	$(SRC_PATH)/configure \
 	  CFLAGS='-O2 -g -mcmodel=medany -march=$(MARCH) -mabi=$(MABI)' \
 	  --host=$(CROSS_ARCH) \
 	  --prefix=$(SYSROOT)/usr \
@@ -33,46 +28,34 @@ endef
 
 define build_macro
 	$(eval MARCH   = $(word $(2),$(MARCH_LIST)))
-	$(MAKE) -C $(BUILD_DIR)_$(MARCH) $(1)
+	+$(MAKE) -C $(BUILD_PATH)_$(MARCH) $(1)
 endef
 
 define allclean_macro
 	$(eval MARCH   = $(word $(1),$(MARCH_LIST)))
-	rm -rf $(BUILD_DIR)_$(MARCH)
+	rm -rf $(BUILD_PATH)_$(MARCH)
 endef
 
+download-body:
+	+$(MAKE) -f $(BUILDER_NAME) $@-default
+
+extract-body:
+	+$(MAKE) -f $(BUILDER_NAME) $@-default
+
 configure-body:
-	$(call configure_macro, 1)
-	$(call configure_macro, 2)
-	$(call configure_macro, 3)
-	$(call configure_macro, 4)
+	$(foreach ARGN, $(ARGN_LIST), $(call configure_macro, $(ARGN)))
 
 build-body:
-	$(call build_macro, all, 1)
-	$(call build_macro, all, 2)
-	$(call build_macro, all, 3)
-	$(call build_macro, all, 4)
+	$(foreach ARGN, $(ARGN_LIST), $(call build_macro, all, $(ARGN)))
 
 install-body:
-	$(call build_macro, install, 1)
-	$(call build_macro, install, 2)
-	$(call build_macro, install, 3)
-	$(call build_macro, install, 4)
+	$(foreach ARGN, $(ARGN_LIST), $(call build_macro, install, $(ARGN)))
 
 clean-body:
-	$(call build_macro, clean, 1)
-	$(call build_macro, clean, 2)
-	$(call build_macro, clean, 3)
-	$(call build_macro, clean, 4)
+	$(foreach ARGN, $(ARGN_LIST), $(call build_macro, clean, $(ARGN)))
 
 distclean-body:
-	$(call build_macro, distclean, 1)
-	$(call build_macro, distclean, 2)
-	$(call build_macro, distclean, 3)
-	$(call build_macro, distclean, 4)
+	$(foreach ARGN, $(ARGN_LIST), $(call build_macro, distclean, $(ARGN)))
 
 allclean-body:
-	$(call allclean_macro, 1)
-	$(call allclean_macro, 2)
-	$(call allclean_macro, 3)
-	$(call allclean_macro, 4)
+	$(foreach ARGN, $(ARGN_LIST), $(call allclean_macro, $(ARGN)))
