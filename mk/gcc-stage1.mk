@@ -1,6 +1,6 @@
 
 SRC_NAME       ?= gcc
-BUILD_NAME     ?= $(SRC_NAME)-stage2-newlib
+BUILD_NAME     ?= $(SRC_NAME)-stage1
 BUILDER_NAME   ?= $(BUILD_NAME)$(BUILDER_SUFFIX).mk
 CONFIGURE_NAME ?= configure
 MAKEFILE_NAME  ?= Makefile
@@ -31,8 +31,7 @@ configure-body: $(SRC_PATH)/mpc
 	  --host=$(HOST_ARCH) \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
-	  --enable-checking=yes \
-	  --enable-languages=c,c++,fortran \
+	  --enable-languages=c \
 	  --disable-libatomic \
 	  --disable-libitm \
 	  --disable-libgomp \
@@ -40,27 +39,30 @@ configure-body: $(SRC_PATH)/mpc
 	  --disable-libquadmath \
 	  --disable-libsanitizer \
 	  --disable-libssp \
-	  --enable-libstdcxx-pch \
+	  --disable-libstdcxx-pch \
 	  --enable-long-long \
 	  --enable-lto \
 	  --disable-multiarch \
 	  --enable-multilib \
-	  --enable-nls \
-	  --enable-plugin \
+	  --disable-nls \
+	  --disable-plugin \
 	  --disable-shared \
 	  --disable-threads \
 	  --enable-tls \
-	  --disable-werror \
 	  --enable-__cxa_atexit \
-	  --with-native-system-header-dir=/include \
+	  --without-headers \
+	  --with-local-prefix=$(SYSROOT) \
 	  --with-newlib \
-	  --with-sysroot=$(SYSROOT)
+	  --with-sysroot=$(SYSROOT) \
+	  --with-pkgversion="testtest"
 
 build-body:
-	+$(MAKE) -f $(BUILDER_NAME) $@-default
+	+$(MAKE) -C $(BUILD_PATH) all-gcc
+	+$(MAKE) -C $(BUILD_PATH) all-target-libgcc
 
 install-body:
-	+$(MAKE) -f $(BUILDER_NAME) $@-default
+	+$(MAKE) -C $(BUILD_PATH) install-gcc
+	+$(MAKE) -C $(BUILD_PATH) install-target-libgcc
 
 clean-body:
 	+$(MAKE) -f $(BUILDER_NAME) $@-default

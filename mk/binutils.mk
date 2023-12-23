@@ -1,19 +1,27 @@
 
 SRC_NAME       ?= binutils
 BUILD_NAME     ?= $(SRC_NAME)
-BUILDER_NAME   ?= $(BUILD_NAME).mk
+BUILDER_NAME   ?= $(BUILD_NAME)$(BUILDER_SUFFIX).mk
+CONFIGURE_NAME ?= configure
+MAKEFILE_NAME  ?= Makefile
 
-CONFIGURE_NAME ?= $(SRC_DIR)/configure
-MAKEFILE_NAME  ?= $(BUILD_DIR)/Makefile
-BINARY_NAME    ?= FORCE
+# Override
+BINARY_PATH    ?= FORCE
 
 include common.mk
 
 # Define body targets.
 
+download-body:
+	+$(MAKE) -f $(BUILDER_NAME) $@-default
+
+extract-body:
+	+$(MAKE) -f $(BUILDER_NAME) $@-default
+
 configure-body:
-	cd $(BUILD_DIR) && \
-	$(SRC_DIR)/configure \
+	cd $(BUILD_PATH) && \
+	$(SRC_PATH)/configure \
+	  --host=$(HOST_ARCH) \
 	  --target=$(CROSS_ARCH) \
 	  --prefix=$(PREFIX) \
 	  --enable-binutils \
@@ -29,16 +37,16 @@ configure-body:
 	  --with-expat=yes
 
 build-body:
-	$(MAKE) -f $(BUILDER_NAME) $@-default
+	+$(MAKE) -f $(BUILDER_NAME) $@-default
 
 install-body:
-	$(MAKE) -f $(BUILDER_NAME) $@-default
+	+$(MAKE) -f $(BUILDER_NAME) $@-default
 
 clean-body:
-	$(MAKE) -f $(BUILDER_NAME) $@-default
+	+$(MAKE) -f $(BUILDER_NAME) $@-default
 
 distclean-body:
-	$(MAKE) -f $(BUILDER_NAME) $@-default
+	+$(MAKE) -f $(BUILDER_NAME) $@-default
 
 allclean-body:
-	$(MAKE) -f $(BUILDER_NAME) $@-default
+	+$(MAKE) -f $(BUILDER_NAME) $@-default

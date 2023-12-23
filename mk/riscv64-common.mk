@@ -1,34 +1,28 @@
 
 # Check environments
 
-ifeq ($(CROSS_ARCH), )
-  $(error "CROSS_ARCH is empty.")
-endif
-ifeq ($(CROSS_ROOT), )
-  $(error "CROSS_ROOT is empty.")
+ifeq ($(TOP_DIR), )
+  $(error "TOP_DIR is empty.")
 endif
 
+ARCH_CFLAGS_FOR_TARGET   ?= -mcmodel=medany
+ARCH_CXXFLAGS_FOR_TARGET ?= -mcmodel=medany
+LINUX_ARCH               ?= riscv
 
 define make_macro
 	$(eval MAKEFILE = $(1))
 	$(eval TARGET   = $(2))
 
-	$(MAKE) -f $(MAKEFILE).mk -C $(TOP_DIR)/mk $(TARGET)
+	+$(MAKE) -f $(MAKEFILE).mk -C $(TOP_DIR)/mk $(TARGET)
 endef
 
 
-all: build
-
-build install:
-	for i in $(SUBMODULES) ; \
-	do \
-		$(MAKE) -f $${i}.mk -C $(TOP_DIR)/mk $@; \
-		if [ 0 -ne $$? ]; then exit 1; fi; \
-	done
+all: install
 
 download extract clean distclean allclean:
 	for i in $(SUBMODULES) ; \
 	do \
+		echo $@ $${i} ---------- ; \
 		$(MAKE) -f $${i}.mk -C $(TOP_DIR)/mk $@; \
 		if [ 0 -ne $$? ]; then exit 1; fi; \
 	done
