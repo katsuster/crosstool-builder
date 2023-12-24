@@ -8,4 +8,4 @@ MARCH_EXT    ?=
 
 include env-riscv64.mk
 include glibc-repo-riscv64.mk
-include glibc.mk
+include glibc-multi.mk
