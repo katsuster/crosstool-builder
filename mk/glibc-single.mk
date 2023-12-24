@@ -33,6 +33,8 @@ build-body:
 
 install-body:
 	+$(MAKE) -C $(BUILD_PATH) install install_root=$(SYSROOT)
+	mkdir -p $(SYSROOT)/usr/lib
+	mkdir -p $(SYSROOT)/usr/lib64
 
 clean-body:
 	+$(MAKE) -f $(BUILDER_NAME) $@-default
