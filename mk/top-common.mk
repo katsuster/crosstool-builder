@@ -5,10 +5,6 @@ ifeq ($(TOP_DIR), )
   $(error "TOP_DIR is empty.")
 endif
 
-ARCH_CFLAGS_FOR_TARGET   ?= -mcmodel=medany
-ARCH_CXXFLAGS_FOR_TARGET ?= -mcmodel=medany
-LINUX_ARCH               ?= riscv
-
 define make_macro
 	$(eval MAKEFILE = $(1))
 	$(eval TARGET   = $(2))

@@ -1,7 +1,7 @@
 SUBMODULES = binutils-riscv64 gcc-stage1-newlib-riscv64 \
 	newlib-riscv64 gcc-stage2-newlib-riscv64
 
-include riscv64-common.mk
+include top-riscv64.mk
 
 build: build-gcc-stage2-newlib
 

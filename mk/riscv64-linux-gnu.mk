@@ -1,7 +1,7 @@
 SUBMODULES = linux-headers-riscv64 binutils-riscv64 gcc-stage1-glibc-riscv64 \
 	glibc-riscv64 gcc-stage2-glibc-riscv64
 
-include riscv64-common.mk
+include top-riscv64.mk
 
 build: build-gcc-stage2-glibc
 
