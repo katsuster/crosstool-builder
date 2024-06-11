@@ -22,6 +22,7 @@ extract-body:
 
 configure-body:
 	+$(MAKE) -C $(SRC_PATH) \
+	  O=$(BUILD_PATH) \
 	  ARCH=$(LINUX_CROSS_ARCH) defconfig
 
 build-body:
@@ -30,17 +31,20 @@ build-body:
 
 install-body:
 	+$(MAKE) -C $(SRC_PATH) \
+	  O=$(BUILD_PATH) \
 	  ARCH=$(LINUX_CROSS_ARCH) \
 	  INSTALL_HDR_PATH=$(SYSROOT)/usr \
 	  headers_install
 
 clean-body:
 	+$(MAKE) -C $(SRC_PATH) \
+	  O=$(BUILD_PATH) \
 	  ARCH=$(LINUX_CROSS_ARCH) \
 	  clean
 
 distclean-body:
 	+$(MAKE) -C $(SRC_PATH) \
+	  O=$(BUILD_PATH) \
 	  ARCH=$(LINUX_CROSS_ARCH) \
 	  distclean
 
